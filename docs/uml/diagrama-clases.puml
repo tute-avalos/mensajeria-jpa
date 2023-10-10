@@ -1,0 +1,102 @@
+@startuml mensajeria-dc
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
+
+/'
+**** Descripción de las clases ****
+'/
+package repository {
+  Interface Cartelera {}
+  Interface RepoDeUsuarios {}
+  Interface RepoDeClientes {}
+  note as N1
+  Repositorios
+  utilizando JPA
+  end note 
+  N1 .. Cartelera
+  N1 .. RepoDeUsuarios
+  N1 .. RepoDeClientes
+}
+package controller {
+  Class SesionController {
+    +login()
+    +logout()
+  }
+  Class IndexController {
+    +homeDispatcher()
+  }
+  Class UsuariosCRUDController {
+    +buscarClientesPorNombres()
+    +cambiarPassword()
+    +registrarNuevoCliente()
+  }
+  Class MensajesCRUDController {
+    +registrarNuevoMensaje()
+    +obtenerMensajesPorPagina()
+    +borrarMensaje()
+    +marcarLeido()
+    +togglearLeido()
+  }
+  note as N2
+  Cada método es un
+  <i>End point</i>
+  end note
+
+  SesionController .. N2
+  IndexController .. N2
+  UsuariosCRUDController .. N2
+  MensajesCRUDController .. N2
+}
+package model {
+  Class Mensaje {
+    -mensaje : String
+    -fechaHora : String
+    -leido : Boolean
+  }
+  
+  abstract Class Usuario {
+    -nombres : String
+    -apellidos : String
+    -username : String
+    -contrasenya : String
+    -email : String
+
+    {abstract} +obtenerNombrePlantilla() : String
+    {abstract} +obtenerElementosPlantilla() : String[]
+  }
+
+  Class Admin { }
+  Class Cliente { }
+
+  note as N3
+  Corresponden a una
+  tabla en la base
+  de datos.
+  end note
+
+  Mensaje .. N3
+  Usuario .. N3
+}
+/'
+**** Relaciones entre las clases ****
+'/
+RepoDeUsuarios <-- SesionController 
+RepoDeUsuarios <-- UsuariosCRUDController
+RepoDeClientes <- UsuariosCRUDController
+RepoDeClientes <- MensajesCRUDController
+Cartelera <-- MensajesCRUDController
+
+/'
+Relación entre entidades
+'/
+Mensaje o-> Usuario : autor
+Mensaje o-> Usuario : destinatario
+
+Usuario <|-- Admin
+Usuario <|-- Cliente
+
+@enduml

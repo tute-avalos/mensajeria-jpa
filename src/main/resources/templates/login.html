@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<!--
+  Astral by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Login | UTN-INSPT Mensajería</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <noscript>
+    <link rel="stylesheet" href="assets/css/noscript.css">
+  </noscript>
+</head>
+
+<body class="is-preload">
+
+  <!-- Wrapper-->
+  <div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+      <!-- Personal -->
+      <article id="login" class="panel">
+        <header>
+          <h1>Ingreso a Mensajería UTN-INSPT</h1>
+          <p class="error-msj" th:text="${error} != null? 'ERROR: '+${error} : ''"></p>
+        </header>
+        <form th:action="@{/login}" method="post">
+          <div class="row">
+            <div class="col-6 col-12-medium">
+              <input type="text" name="usr" id="usr" placeholder="Usuario" required />
+            </div>
+            <div class="col-6 col-12-medium">
+              <input type="password" name="pswd" id="pswd" placeholder="Password" required />
+            </div>
+            <div class="col-12-medium">
+              <input type="submit" value="Entrar" />
+            </div>
+          </div>
+        </form>
+      </article>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+      <ul class="copyright">
+        <li>&copy; 2023 - <a href="https://tute-avalos.com/">Prof. Matías S. Ávalos</a>.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

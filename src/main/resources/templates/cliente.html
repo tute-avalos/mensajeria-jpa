@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<!--
+  Astral by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>UTN-INSPT Mensajería</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/custom.css" />
+  <noscript>
+    <link rel="stylesheet" href="assets/css/noscript.css" />
+  </noscript>
+</head>
+
+<body class="is-preload">
+
+  <!-- Wrapper-->
+  <div id="wrapper">
+
+    <!-- Nav -->
+    <nav id="nav">
+      <a href="#home" class="icon solid fa-user"><span>Yo</span></a>
+      <a href="#read" class="icon solid fa-envelope"><span>Buzón</span></a>
+      <a href="#write" class="icon solid fa-edit"><span>Escribir</span></a>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Cliente -->
+      <article id="home" class="panel intro">
+        <header>
+          <h1 th:text="${usuarioLoggeado.apellidos}+', '+${usuarioLoggeado.nombres}"></h1>
+          <p th:text="${usuarioLoggeado.email}"></p>
+          <p th:if="${errorPswd != null}" class="error-msj" th:text="${errorPswd}"></p>
+          <p th:if="${successPswd != null}" class="success-msj" th:text="${successPswd}"></p>
+        </header>
+        <section>
+          <form th:action="@{/cambiar_password}" method="post">
+            <div class="row aln-center">
+              <div class="col-8 col-8-medium">
+                <input type="password" name="pswd_old" id="pswd_old" placeholder="Password actual">
+              </div>
+              <div class="col-8 col-8-medium">
+                <input type="password" name="pswd_new" id="pswd_new" placeholder="Password nuevo">
+              </div>
+              <div class="col-8 col-8-medium">
+                <input type="submit" value="Cambiar">
+              </div>
+            </div>
+          </form>
+          <div class="row aln-center">
+            <div class="col-10 col-12-medium">
+              <p><a class="button" href="/logout">Cerrar Sesión</a></p>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- Mensajes -->
+      <article id="read" class="panel">
+        <header>
+          <h2>Mensajes</h2>
+        </header>
+        <section>
+          <div class="wrapper">
+            <div class="popup">
+              <div class="mensaje"></div>
+              <a href="/#read" class="button close">X</a>
+            </div>
+          </div>
+          <table class="default">
+            <thead>
+              <tr>
+                <th></th>
+                <th id="th-pages"></th>
+                <th class="bfboton" id="th-pgback"></th>
+                <th class="bfboton" id="th-pgforward"></th>
+              </tr>
+            </thead>
+            <tbody class="table-mensajes">
+            </tbody>
+          </table>
+        </section>
+      </article>
+
+      <!-- Nuevo Mensaje -->
+      <article id="write" class="panel">
+        <header>
+          <h2>Nuevo mensaje</h2>
+          <p th:if="${errorMsj != null}" class="error-msj" th:text="${errorMsj}"></p>
+          <p th:if="${successMsj != null}" class="success-msj" th:text="${successMsj}"></p>
+        </header>
+        <form th:action="@{/nuevo_mensaje}" method="post">
+          <div class="row">
+            <div class="col-12 col-12-medium">
+              <input type="email" name="email" id="email_in" placeholder="Email" required />
+              <ul class="list list-email"></ul>
+            </div>
+            <div class="col-12">
+              <textarea name="mensaje" placeholder="Mensaje" rows="3" maxlength="2048" required></textarea>
+            </div>
+            <div class="col-12">
+              <input type="hidden" name="usr_id" id="usr_id" value="0" />
+              <input type="submit" value="Enviar Mensaje" />
+            </div>
+          </div>
+        </form>
+      </article>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+      <ul class="copyright">
+        <li>&copy; 2023 - <a href="https://tute-avalos.com/">Prof. Matías S. Ávalos</a>.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+</body>
+
+</html>

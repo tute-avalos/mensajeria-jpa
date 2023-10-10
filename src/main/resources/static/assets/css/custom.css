@@ -1,0 +1,30 @@
+/**
+ * Copyright (c) 2023 Matías S. Ávalos (@tute_avalos)
+ * 
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+.error-msj {
+    color: red;
+}
+
+.success-msj {
+    color: green;
+}
+
+.list {
+    list-style: none;
+    width: 100%;
+    background-color: #f8f8f8;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+}
+
+.list-items {
+    padding: 10px 5px;
+}
+
+.list-items:hover {
+    background-color: #dddddd;
+}

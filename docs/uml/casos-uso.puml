@@ -1,0 +1,28 @@
+@startuml mensajeria-cu
+skinparam backgroundColor transparent
+left to right direction
+
+actor "Cliente" as usr
+actor "Admin" as admin
+
+rectangle Mensajeria {
+  usecase "Buscar clientes" as buscarCli
+  usecase "CRUD Mensajes" as crudMsjs
+  usecase "Ingresar al sistema" <<login>> as login
+  usecase "Cerrar sesión" <<logout>> as logout
+  usecase "Cambiar Password" as chgPswd
+  usecase "CRUD Clientes" as crudUsrs
+}
+
+usr --> buscarCli
+usr --> crudMsjs
+usr --> login
+usr --> logout
+usr --> chgPswd
+
+login <-- admin
+chgPswd <-- admin
+crudUsrs <-- admin
+logout <-- admin
+
+@enduml
